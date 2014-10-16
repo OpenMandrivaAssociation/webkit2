@@ -1,0 +1,13 @@
+Index: webkitgtk-2.1.2/Source/JavaScriptCore/JavaScriptCore.gir.in
+===================================================================
+--- webkitgtk-2.1.2.orig/Source/JavaScriptCore/JavaScriptCore.gir.in
++++ webkitgtk-2.1.2/Source/JavaScriptCore/JavaScriptCore.gir.in
+@@ -3,7 +3,7 @@
+             xmlns="http://www.gtk.org/introspection/core/1.0"
+             xmlns:c="http://www.gtk.org/introspection/c/1.0">
+   <namespace name="JavaScriptCore" version="@WEBKITGTK_API_VERSION@" 
+-             shared-library="javascriptcoregtk-@WEBKITGTK_API_VERSION@"
++             shared-library="libjavascriptcoregtk-@WEBKITGTK_API_VERSION@.so.18"
+              c:identifier-prefixes="JS"
+              c:symbol-prefixes="JS">
+     <record name="GlobalContext" c:type="JSGlobalContextRef" foreign="1"/>
