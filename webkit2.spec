@@ -15,7 +15,7 @@
 Summary:	Web browser engine
 Name:		webkit2
 Version:	2.6.1
-Release:	%mkrel 1
+Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -28,9 +28,9 @@ BuildRequires:	curl-devel >= 7.11.0
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel
 BuildRequires:	gperf
-BuildRequires:	libicu-devel
-BuildRequires:	libjpeg-devel
-BuildRequires:	libpng-devel
+BuildRequires:	icu-devel
+BuildRequires:	jpeg-devel
+BuildRequires:	png-devel
 BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libsecret-1)
 BuildRequires:	librsvg-devel >= 2.2.0
@@ -40,21 +40,20 @@ BuildRequires:	libtool
 BuildRequires:	libxslt-devel
 BuildRequires:	libxt-devel
 BuildRequires:	pkgconfig
-BuildRequires:	gtk+2-devel
+BuildRequires:	pkgconfig(gtk+-2.0)
 BuildRequires:	gtk+3-devel
 BuildRequires:	libgail-3.0-devel
 BuildRequires:	pkgconfig(glesv2)
 BuildRequires:	sqlite3-devel
-BuildRequires:	xft2-devel
-BuildRequires:	libgstreamer1.0-plugins-base-devel
+BuildRequires:	pkgconfig(xft)
+BuildRequires:	pkgconfig(gstreamer-plugins-base-1.0)
 BuildRequires:	libgnome-keyring-devel
 BuildRequires:	gobject-introspection-devel
 BuildRequires:	enchant-devel
 BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(gl)
-BuildRequires:	pkgconfig(geoclue)
+BuildRequires:	pkgconfig(geoclue-2.0)
 BuildRequires:	gail-devel
-BuildRequires:	perl-Switch
 BuildRequires:	ruby
 BuildRequires:	cmake >= 2.8.8
 Requires:	%{libwebkit2} = %{version}
@@ -122,10 +121,12 @@ GObject Introspection interface description for WebKit.
 
 %prep
 %setup -qn %{oname}-%{version}
-%autopatch -p1
+%apply_patches
 
 %build
 %define myflags %(echo %{optflags} | sed 's/-g /-g1 /')
+export CC=gcc
+export CXX=g++
 export CFLAGS="%myflags"
 export CXXFLAGS="%myflags"
 %cmake -DPORT=GTK
@@ -165,37 +166,4 @@ export CXXFLAGS="%myflags"
 %files -n %{webkit2_gir}
 %{_libdir}/girepository-1.0/WebKit2-%{api}.typelib
 %{_libdir}/girepository-1.0/WebKit2WebExtension-%{api}.typelib
-
-
-%changelog
-* Tue Oct 14 2014 luigiwalser <luigiwalser> 2.6.1-1.mga5
-+ Revision: 738653
-- 2.6.1
-
-* Tue Sep 30 2014 tv <tv> 2.6.0-3.mga5
-+ Revision: 731942
-- adjust gir requires
-
-* Mon Sep 29 2014 tv <tv> 2.6.0-2.mga5
-+ Revision: 731804
-- add patch from suse: fixup the .gir file to contain the full library name for libjavascriptcore
-
-* Mon Sep 29 2014 wally <wally> 2.6.0-1.mga5
-+ Revision: 731714
-- new version 2.6.0
-- rebuild with new rpm-mageia-setup to generate requires for .typelib files
-
-* Tue Sep 16 2014 umeabot <umeabot> 2.5.3-3.mga5
-+ Revision: 690286
-- Mageia 5 Mass Rebuild
-
-* Thu Aug 28 2014 fwang <fwang> 2.5.3-2.mga5
-+ Revision: 669056
-- drop obsoletes
-
-* Thu Aug 28 2014 fwang <fwang> 2.5.3-1.mga5
-+ Revision: 669027
-- update file list
-- build gtk port
-- imported package webkit2
 
