@@ -141,6 +141,7 @@ export CXXFLAGS="%myflags"
 %dir %{_libexecdir}/webkit2gtk-%{api}
 %{_libexecdir}/webkit2gtk-%{api}/*
 %dir %{_libdir}/webkit2gtk-%{api}
+%dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
 %{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files jsc
