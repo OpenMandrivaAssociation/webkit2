@@ -20,6 +20,8 @@ License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 Patch0:		webkitgtk-typelib-sharelib-link.patch
+# our cairo is not built with egl so build fails without this
+Patch1:		webkitgtk-2.6.1-disable_egl.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
