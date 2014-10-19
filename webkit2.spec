@@ -15,7 +15,7 @@
 Summary:	Web browser engine
 Name:		webkit2
 Version:	2.6.1
-Release:	1
+Release:	2
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -131,7 +131,7 @@ export CC=gcc
 export CXX=g++
 export CFLAGS="%myflags"
 export CXXFLAGS="%myflags"
-%cmake -DPORT=GTK
+%cmake -DPORT=GTK -DLIB_INSTALL_DIR:PATH=%{_libdir}
 %make
 
 %install
