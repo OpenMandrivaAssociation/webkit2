@@ -15,7 +15,7 @@
 Summary:	Web browser engine
 Name:		webkit2
 Version:	2.6.1
-Release:	2
+Release:	3
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -126,11 +126,14 @@ GObject Introspection interface description for WebKit.
 %apply_patches
 
 %build
-%define myflags %(echo %{optflags} | sed 's/-g /-g1 /')
+# (tpg) do not build debug code
+%global optflags %(echo %{optflags} | sed -e 's/-g /-g0 /' -e 's/-gdwarf-4//')
+# Use linker flags to reduce memory consumption
+%global ldflags %{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads
 export CC=gcc
 export CXX=g++
-export CFLAGS="%myflags"
-export CXXFLAGS="%myflags"
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
 %cmake -DPORT=GTK -DLIB_INSTALL_DIR:PATH=%{_libdir}
 %make
 
