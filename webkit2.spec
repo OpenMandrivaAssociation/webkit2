@@ -15,7 +15,7 @@
 Summary:	Web browser engine
 Name:		webkit2
 Version:	2.6.1
-Release:	3
+Release:	4
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
