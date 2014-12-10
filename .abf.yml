@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   webkitgtk-2.6.1.tar.xz: b37b1114adab1348f413f277869173d974669512
+sources:
+  webkitgtk-2.6.4.tar.xz: 35086bc154e79f6f0ce3013a7dbe1dadebb5c9d1
