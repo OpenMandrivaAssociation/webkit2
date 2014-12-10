@@ -1,3 +1,5 @@
+%define debug_package %{nil}
+
 %define oname webkitgtk
 
 %define api 4.0
@@ -15,7 +17,7 @@
 Summary:	Web browser engine
 Name:		webkit2
 Version:	2.6.1
-Release:	4
+Release:	5
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
