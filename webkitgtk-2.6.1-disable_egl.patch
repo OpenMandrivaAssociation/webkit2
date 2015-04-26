@@ -1,15 +1,15 @@
 --- webkitgtk-2.6.1/Source/cmake/OptionsGTK.cmake.orig	2014-10-19 13:49:09.173732960 +0100
 +++ webkitgtk-2.6.1/Source/cmake/OptionsGTK.cmake	2014-10-19 13:49:38.249730817 +0100
 @@ -67,9 +67,6 @@
-     if (GLX_FOUND)
-         list(APPEND CAIRO_GL_COMPONENTS cairo-glx)
-     endif ()
--    if (EGL_FOUND)
--        list(APPEND CAIRO_GL_COMPONENTS cairo-egl)
--    endif ()
-     find_package(CairoGL 1.10.2 COMPONENTS ${CAIRO_GL_COMPONENTS})
-     if (CAIRO_GL_FOUND)
-         WEBKIT_OPTION_DEFAULT_PORT_VALUE(ENABLE_ACCELERATED_2D_CANVAS ON)
+         if (GLX_FOUND)
+             list(APPEND CAIRO_GL_COMPONENTS cairo-glx)
+         endif ()
+-        if (EGL_FOUND)
+-            list(APPEND CAIRO_GL_COMPONENTS cairo-egl)
+-        endif ()
+         find_package(CairoGL 1.10.2 COMPONENTS ${CAIRO_GL_COMPONENTS})
+         if (CAIRO_GL_FOUND)
+             WEBKIT_OPTION_DEFAULT_PORT_VALUE(ENABLE_ACCELERATED_2D_CANVAS ON)
 @@ -275,10 +272,6 @@
      endif ()
  endif ()
@@ -22,8 +22,8 @@
      find_package(Enchant REQUIRED)
  endif ()
 @@ -293,10 +286,6 @@
-     add_definitions(-DWTF_USE_TEXTURE_MAPPER_GL=1)
-     add_definitions(-DENABLE_3D_RENDERING=1)
+         add_definitions(-DWTF_USE_OPENGL=1)
+     endif ()
  
 -    if (EGL_FOUND)
 -        add_definitions(-DWTF_USE_EGL=1)
