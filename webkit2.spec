@@ -131,9 +131,6 @@ GObject Introspection interface description for WebKit.
 # (tpg) do not build debug code
 %global optflags %(echo %{optflags} | sed -e 's/-g /-g0 /' -e 's/-gdwarf-4//')
 # Use linker flags to reduce memory consumption
-%global ldflags %{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads
-export CC=gcc
-export CXX=g++
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 %cmake -DPORT=GTK -DLIB_INSTALL_DIR:PATH=%{_libdir}
