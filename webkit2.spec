@@ -31,6 +31,7 @@ BuildRequires:	curl-devel >= 7.11.0
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel
 BuildRequires:	gperf
+BuildRequires:	hyphen-devel
 BuildRequires:	icu-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	png-devel
