@@ -17,7 +17,7 @@
 
 Summary:	Web browser engine
 Name:		webkit2
-Version:	2.10.0
+Version:	2.10.4
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
