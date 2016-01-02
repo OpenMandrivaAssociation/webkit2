@@ -23,6 +23,8 @@ License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 Patch0:		webkitgtk-typelib-sharelib-link.patch
+# (cb) force disable lto when building the typelibs
+Patch1:		webkitgtk-2.10.4-nolto.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -130,10 +132,9 @@ GObject Introspection interface description for WebKit.
 
 %build
 # (tpg) do not build debug code
-%global optflags %(echo %{optflags} | sed -e 's/-g /-g0 /' -e 's/-gdwarf-4//')
-
-export CC=gcc
-export CXX=g++
+# (cb) clang segfaults at Oz
+# (cb) ensure lto disabled
+%global optflags %(echo %{optflags} -fno-lto | sed -e 's/-g /-g0 /' -e 's/-gdwarf-4//' -e 's/-Oz/-O1/')
 
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"

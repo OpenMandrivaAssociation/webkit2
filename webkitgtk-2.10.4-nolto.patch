@@ -1,0 +1,20 @@
+--- webkitgtk-2.10.4/Source/WebKit2/PlatformGTK.cmake.orig	2016-01-02 14:14:40.112667344 +0000
++++ webkitgtk-2.10.4/Source/WebKit2/PlatformGTK.cmake	2016-01-02 14:15:08.069669442 +0000
+@@ -884,7 +884,7 @@
+     OUTPUT ${CMAKE_BINARY_DIR}/WebKit2-${WEBKITGTK_API_VERSION}.gir
+     DEPENDS WebKit2
+     DEPENDS ${CMAKE_BINARY_DIR}/JavaScriptCore-${WEBKITGTK_API_VERSION}.gir
+-    COMMAND CC=${CMAKE_C_COMPILER} CFLAGS=-Wno-deprecated-declarations LDFLAGS=
++    COMMAND CC=${CMAKE_C_COMPILER} CFLAGS='-Wno-deprecated-declarations -fno-lto' LDFLAGS=
+         LD_LIBRARY_PATH="${INTROSPECTION_ADDITIONAL_LIBRARY_PATH}"
+         ${INTROSPECTION_SCANNER}
+         --quiet
+@@ -930,7 +930,7 @@
+     OUTPUT ${CMAKE_BINARY_DIR}/WebKit2WebExtension-${WEBKITGTK_API_VERSION}.gir
+     DEPENDS ${CMAKE_BINARY_DIR}/JavaScriptCore-${WEBKITGTK_API_VERSION}.gir
+     DEPENDS ${CMAKE_BINARY_DIR}/WebKit2-${WEBKITGTK_API_VERSION}.gir
+-    COMMAND CC=${CMAKE_C_COMPILER} CFLAGS=-Wno-deprecated-declarations
++    COMMAND CC=${CMAKE_C_COMPILER} CFLAGS='-Wno-deprecated-declarations -fno-lto'
+         LDFLAGS="${INTROSPECTION_ADDITIONAL_LDFLAGS}"
+         LD_LIBRARY_PATH="${INTROSPECTION_ADDITIONAL_LIBRARY_PATH}"
+         ${INTROSPECTION_SCANNER}
