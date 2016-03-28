@@ -147,7 +147,7 @@ export CXX=g++
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
-%cmake -DPORT=GTK -DUSE_LD_GOLD=OFF -DLIB_INSTALL_DIR:PATH=%{_libdir}
+%cmake -DPORT=GTK -DUSE_LD_GOLD=OFF -DLIB_INSTALL_DIR:PATH=%{_libdir} -DCMAKE_BUILD_TYPE=Release
 %make
 
 %install
