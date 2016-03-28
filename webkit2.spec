@@ -144,10 +144,19 @@ export CC=gcc
 export CXX=g++
 %endif
 
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
+export CFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
+export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
-%cmake -DPORT=GTK -DUSE_LD_GOLD=OFF -DLIB_INSTALL_DIR:PATH=%{_libdir} -DCMAKE_BUILD_TYPE=Release
+%cmake	-DPORT=GTK \
+	-DUSE_LD_GOLD=OFF \
+	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_C_FLAGS_RELEASE="" \
+	-DCMAKE_C_FLAGS_DEBUG="" \
+	-DCMAKE_CXX_FLAGS_RELEASE="" \
+	-DCMAKE_CXX_FLAGS_DEBUG=""
+
+	
 %make
 
 %install
