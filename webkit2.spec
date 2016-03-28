@@ -141,7 +141,7 @@ mkdir -p bfd
 ln -s %{_bindir}/ld.bfd bfd/ld
 export PATH=$PWD/bfd:$PATH
 
-%ifarch %{ix86}
+%ifarch %{ix86} %{arm}
 # clang wont build this on i586:
 # /bits/atomic_base.h:408:16: error: cannot compile this atomic library call yet
 #      { return __atomic_add_fetch(&_M_i, 1, memory_order_seq_cst); }
