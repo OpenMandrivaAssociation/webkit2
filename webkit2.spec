@@ -168,12 +168,13 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 %files -f WebKit2GTK-%{api}.lang
 %dir %{_libexecdir}/webkit2gtk-%{api}
 %{_libexecdir}/webkit2gtk-%{api}/*
+%exclude %{_libexecdir}/webkit2gtk-%{api}/jsc
 %dir %{_libdir}/webkit2gtk-%{api}
 %dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
 %{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files jsc
-%{_bindir}/jsc
+%{_libexecdir}/webkit2gtk-%{api}/jsc
 
 %files -n %{libjavascriptcoregtk}
 %{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk_major}
