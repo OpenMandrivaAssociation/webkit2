@@ -17,7 +17,7 @@
 
 Summary:	Web browser engine
 Name:		webkit2
-Version:	2.12.3
+Version:	2.14.2
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -60,6 +60,7 @@ BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(geoclue-2.0)
 BuildRequires:	pkgconfig(libnotify)
+BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	gail-devel
 BuildRequires:	ruby
 BuildRequires:	cmake >= 2.8.8
@@ -167,12 +168,13 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 %files -f WebKit2GTK-%{api}.lang
 %dir %{_libexecdir}/webkit2gtk-%{api}
 %{_libexecdir}/webkit2gtk-%{api}/*
+%exclude %{_libexecdir}/webkit2gtk-%{api}/jsc
 %dir %{_libdir}/webkit2gtk-%{api}
 %dir %{_libdir}/webkit2gtk-%{api}/injected-bundle
 %{_libdir}/webkit2gtk-%{api}/injected-bundle/libwebkit2gtkinjectedbundle.so
 
 %files jsc
-%{_bindir}/jsc
+%{_libexecdir}/webkit2gtk-%{api}/jsc
 
 %files -n %{libjavascriptcoregtk}
 %{_libdir}/libjavascriptcoregtk-%{api}.so.%{javascriptcoregtk_major}
