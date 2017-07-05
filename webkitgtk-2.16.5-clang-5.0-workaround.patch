@@ -1,0 +1,22 @@
+--- webkitgtk-2.16.5/Source/ThirdParty/ANGLE/src/compiler/preprocessor/ExpressionParser.cpp.omv~	2017-07-05 17:10:02.768291293 +0200
++++ webkitgtk-2.16.5/Source/ThirdParty/ANGLE/src/compiler/preprocessor/ExpressionParser.cpp	2017-07-05 17:10:11.708082859 +0200
+@@ -293,7 +293,7 @@ typedef short int yytype_int16;
+ # define YYUSE(E) /* empty */
+ #endif
+ 
+-#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
++#if !defined(__clang__) && defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+ /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
+ # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
+     _Pragma ("GCC diagnostic push") \
+--- webkitgtk-2.16.5/Source/ThirdParty/ANGLE/src/compiler/translator/glslang_tab.cpp.omv~	2017-07-05 17:09:24.107192904 +0200
++++ webkitgtk-2.16.5/Source/ThirdParty/ANGLE/src/compiler/translator/glslang_tab.cpp	2017-07-05 17:09:32.828989472 +0200
+@@ -495,7 +495,7 @@ typedef short int yytype_int16;
+ # define YYUSE(E) /* empty */
+ #endif
+ 
+-#if defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
++#if !defined(__clang__) && defined __GNUC__ && 407 <= __GNUC__ * 100 + __GNUC_MINOR__
+ /* Suppress an incorrect diagnostic about yylval being uninitialized.  */
+ # define YY_IGNORE_MAYBE_UNINITIALIZED_BEGIN \
+     _Pragma ("GCC diagnostic push") \
