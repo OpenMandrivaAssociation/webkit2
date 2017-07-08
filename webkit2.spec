@@ -40,6 +40,7 @@ BuildRequires:	jpeg-devel
 BuildRequires:	png-devel
 BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libsecret-1)
+BuildRequires:	pkgconfig(geoclue-2.0)
 BuildRequires:	librsvg-devel >= 2.2.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libsoup-devel >= 2.42.0
