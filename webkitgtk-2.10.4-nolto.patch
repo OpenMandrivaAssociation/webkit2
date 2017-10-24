@@ -1,5 +1,5 @@
---- webkitgtk-2.12.0/Source/WebKit2/PlatformGTK.cmake.orig	2016-03-25 23:52:58.152886449 +0000
-+++ webkitgtk-2.12.0/Source/WebKit2/PlatformGTK.cmake	2016-03-25 23:53:34.376884133 +0000
+--- webkitgtk-2.12.0/Source/WebKit/PlatformGTK.cmake.orig	2016-03-25 23:52:58.152886449 +0000
++++ webkitgtk-2.12.0/Source/WebKit/PlatformGTK.cmake	2016-03-25 23:53:34.376884133 +0000
 @@ -915,7 +915,7 @@
      OUTPUT ${CMAKE_BINARY_DIR}/WebKit2-${WEBKITGTK_API_VERSION}.gir
      DEPENDS WebKit2
