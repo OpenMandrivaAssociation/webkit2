@@ -17,7 +17,7 @@
 
 Summary:	Web browser engine
 Name:		webkit2
-Version:	2.18.1
+Version:	2.18.2
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -68,6 +68,7 @@ BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	gail-devel
 BuildRequires:	ruby
 BuildRequires:	cmake >= 2.8.8
+BuildRequires:	perl-JSON-PP
 Requires:	%{libwebkit2} = %{version}
 
 %description
