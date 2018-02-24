@@ -16,7 +16,7 @@
 %define develname %mklibname -d webkit2
 
 Summary:	Web browser engine
-Name:		webkit
+Name:		webkit2
 Version:	2.18.6
 Release:	1
 License:	BSD and LGPLv2+
