@@ -160,7 +160,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
 %ifarch %{ix86}
-	CMAKE_CXX_LIBRARY_ARCHITECTURE=%{_arch} \
+	-DCMAKE_CXX_LIBRARY_ARCHITECTURE=%{_arch} \
 %endif
 	-DCMAKE_C_FLAGS_DEBUG="" \
 	-DCMAKE_CXX_FLAGS_RELEASE="" \
