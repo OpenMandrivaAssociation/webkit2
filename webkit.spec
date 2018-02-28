@@ -26,6 +26,7 @@ Patch0:		webkitgtk-typelib-sharelib-link.patch
 # (cb) force disable lto when building the typelibs
 Patch1:		webkitgtk-2.10.4-nolto.patch
 Patch2:		webkitgtk-2.16.5-clang-5.0-workaround.patch
+Patch3:		fix-ftbfs-x86.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
