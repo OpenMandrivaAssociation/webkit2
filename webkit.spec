@@ -18,7 +18,7 @@
 Summary:	Web browser engine
 Name:		webkit
 Version:	2.18.6
-Release:	2
+Release:	3
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
