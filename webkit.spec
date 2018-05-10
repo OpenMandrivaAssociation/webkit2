@@ -17,8 +17,8 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.18.6
-Release:	3
+Version:	2.20.2
+Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
@@ -157,6 +157,7 @@ export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
 %cmake	-DPORT=GTK \
 	-DUSE_LD_GOLD=OFF \
+	-DUSE_WOFF2:BOOL=OFF \
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
