@@ -66,6 +66,8 @@ BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(geoclue-2.0)
 BuildRequires:	pkgconfig(libnotify)
 BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(gpg-error)
+BuildRequires:	pkgconfig(libgcrypt) >= 1.6.0
 BuildRequires:	gail-devel
 BuildRequires:	ruby
 BuildRequires:	cmake >= 2.8.8
