@@ -16,7 +16,7 @@
 %define develname %mklibname -d webkit2
 
 Summary:	Web browser engine
-Name:		webkit
+Name:		webkit2
 Version:	2.22.4
 Release:	1
 License:	BSD and LGPLv2+
@@ -72,7 +72,6 @@ BuildRequires:	ruby
 BuildRequires:	cmake >= 2.8.8
 BuildRequires:	perl-JSON-PP
 Requires:	%{libwebkit2} = %{version}
-%rename		webkit2
 
 %description
 WebKit is an open source web browser engine.
