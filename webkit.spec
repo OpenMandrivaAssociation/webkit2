@@ -161,6 +161,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
+	-DENABLE_MEDIA_SOURCE=OFF \
 %ifarch %{ix86}
 	-DCMAKE_CXX_LIBRARY_ARCHITECTURE=%{_arch} \
 %endif
