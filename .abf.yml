@@ -1,5 +1,2 @@
-removed_sources:
-  webkitgtk-2.22.3.tar.xz: c16129f4098b35597457255e63e60126ff3e6daa
-  webkitgtk-2.22.4.tar.xz: adf857c8a8b8fb79ba9b01bbe4b454956e633952
 sources:
-  webkitgtk-2.22.5.tar.xz: 809b067a1672a81a4ce31363a0872c668cc72953
+  webkitgtk-2.24.1.tar.xz: e57ce1f623e26dc1726109891a02c35b2e99a440
