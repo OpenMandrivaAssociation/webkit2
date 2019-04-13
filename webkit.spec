@@ -1,5 +1,6 @@
 %define debug_package %{nil}
 %define _disable_lto 1
+%define Werror_cflags %nil
 
 %define oname webkitgtk
 
