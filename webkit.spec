@@ -1,3 +1,8 @@
+# Fix build on aarch64
+%ifarch aarch64
+%define _smp_ncpus_max 2
+%else
+
 %define debug_package %{nil}
 %define _disable_lto 1
 %define Werror_cflags %nil
