@@ -1,8 +1,3 @@
-# Fix build on aarch64
-#ifarch aarch64
-#define _smp_ncpus_max 2
-#endif
-
 %define debug_package %{nil}
 %define _disable_lto 1
 %define Werror_cflags %nil
@@ -178,10 +173,10 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_CXX_FLAGS_DEBUG=""
 
 
-%make
+%make_build
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 
 %find_lang WebKit2GTK-%{api}
 
