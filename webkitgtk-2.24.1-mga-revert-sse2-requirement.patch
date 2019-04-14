@@ -1,0 +1,153 @@
+diff -Naurp webkitgtk-2.24.1/CMakeLists.txt webkitgtk-2.24.0/CMakeLists.txt
+--- webkitgtk-2.24.1/CMakeLists.txt	2019-04-08 12:45:38.000000000 +0200
++++ webkitgtk-2.24.0/CMakeLists.txt	2019-02-12 12:20:53.000000000 +0100
+@@ -106,16 +106,6 @@ else ()
+     set(WTF_CPU_UNKNOWN 1)
+ endif ()
+ 
+-#---------------------------
+-# Make sure SSE2 is present.
+-#---------------------------
+-if (WTF_CPU_X86)
+-    include(FindSSE2)
+-    if (NOT SSE2_SUPPORT_FOUND)
+-        message(FATAL_ERROR "SSE2 support is required to compile WebKit")
+-    endif ()
+-endif ()
+-
+ # -----------------------------------------------------------------------------
+ # Determine the operating system
+ # -----------------------------------------------------------------------------
+diff -Naurp webkitgtk-2.24.1/Source/cmake/FindSSE2.cmake webkitgtk-2.24.0/Source/cmake/FindSSE2.cmake
+--- webkitgtk-2.24.1/Source/cmake/FindSSE2.cmake	2019-04-08 12:45:37.000000000 +0200
++++ webkitgtk-2.24.0/Source/cmake/FindSSE2.cmake	1970-01-01 01:00:00.000000000 +0100
+@@ -1,65 +0,0 @@
+-#################################
+-# Check for the presence of SSE2.
+-#
+-# Once done, this will define:
+-# - SSE2_SUPPORT_FOUND - the system supports (at least) SSE2.
+-#
+-# Copyright (c) 2014, Pablo Fernandez Alcantarilla, Jesus Nuevo
+-# Copyright (c) 2019, Igalia S.L.
+-#
+-# Redistribution and use in source and binary forms, with or without modification,
+-# are permitted provided that the following conditions are met:
+-#
+-#   * Redistributions of source code must retain the above copyright notice,
+-#     this list of conditions and the following disclaimer.
+-#
+-#   * Redistributions in binary form must reproduce the above copyright notice,
+-#     this list of conditions and the following disclaimer in the documentation
+-#     and/or other materials provided with the distribution.
+-#
+-#   * Neither the name of the copyright holders nor the names of its contributors
+-#     may be used to endorse or promote products derived from this software without
+-#     specific prior written permission.
+-#
+-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+-# EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+-# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
+-# SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+-# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+-# TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+-# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+-# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY
+-# WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-
+-set(SSE2_SUPPORT_FOUND FALSE)
+-
+-macro(CHECK_FOR_SSE2)
+-    include(CheckCXXSourceRuns)
+-
+-    check_cxx_source_runs("
+-        #include <emmintrin.h>
+-        int main ()
+-        {
+-            __m128d a, b;
+-            double vals[2] = {0};
+-            a = _mm_loadu_pd (vals);
+-            b = _mm_add_pd (a,a);
+-            _mm_storeu_pd (vals,b);
+-            return(0);
+-        }"
+-        HAVE_SSE2_EXTENSIONS)
+-
+-    if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANG)
+-        if (HAVE_SSE2_EXTENSIONS)
+-            set(SSE2_SUPPORT_FOUND TRUE)
+-        endif ()
+-    elseif (MSVC AND NOT CMAKE_CL_64)
+-        if (HAVE_SSE2_EXTENSIONS)
+-            set(SSE2_SUPPORT_FOUND TRUE)
+-            message(STATUS "Found SSE2 extensions.")
+-        endif (HAVE_SSE2_EXTENSIONS)
+-    endif ()
+-
+-endmacro(CHECK_FOR_SSE2)
+-
+-CHECK_FOR_SSE2()
+diff -Naurp webkitgtk-2.24.1/Source/JavaScriptCore/assembler/MacroAssemblerX86Common.cpp webkitgtk-2.24.0/Source/JavaScriptCore/assembler/MacroAssemblerX86Common.cpp
+--- webkitgtk-2.24.1/Source/JavaScriptCore/assembler/MacroAssemblerX86Common.cpp	2019-04-08 12:45:38.000000000 +0200
++++ webkitgtk-2.24.0/Source/JavaScriptCore/assembler/MacroAssemblerX86Common.cpp	2019-02-12 12:21:03.000000000 +0100
+@@ -787,6 +787,7 @@ void MacroAssemblerX86Common::collectCPU
+     std::call_once(onceKey, [] {
+         {
+             CPUID cpuid = getCPUID(0x1);
++            s_sse2CheckState = (cpuid[3] & (1 << 26)) ? CPUIDCheckState::Set : CPUIDCheckState::Clear;
+             s_sse4_1CheckState = (cpuid[2] & (1 << 19)) ? CPUIDCheckState::Set : CPUIDCheckState::Clear;
+             s_sse4_2CheckState = (cpuid[2] & (1 << 20)) ? CPUIDCheckState::Set : CPUIDCheckState::Clear;
+             s_popcntCheckState = (cpuid[2] & (1 << 23)) ? CPUIDCheckState::Set : CPUIDCheckState::Clear;
+@@ -803,6 +804,7 @@ void MacroAssemblerX86Common::collectCPU
+     });
+ }
+ 
++MacroAssemblerX86Common::CPUIDCheckState MacroAssemblerX86Common::s_sse2CheckState = CPUIDCheckState::NotChecked;
+ MacroAssemblerX86Common::CPUIDCheckState MacroAssemblerX86Common::s_sse4_1CheckState = CPUIDCheckState::NotChecked;
+ MacroAssemblerX86Common::CPUIDCheckState MacroAssemblerX86Common::s_sse4_2CheckState = CPUIDCheckState::NotChecked;
+ MacroAssemblerX86Common::CPUIDCheckState MacroAssemblerX86Common::s_avxCheckState = CPUIDCheckState::NotChecked;
+diff -Naurp webkitgtk-2.24.1/Source/JavaScriptCore/assembler/MacroAssemblerX86Common.h webkitgtk-2.24.0/Source/JavaScriptCore/assembler/MacroAssemblerX86Common.h
+--- webkitgtk-2.24.1/Source/JavaScriptCore/assembler/MacroAssemblerX86Common.h	2019-04-08 12:45:38.000000000 +0200
++++ webkitgtk-2.24.0/Source/JavaScriptCore/assembler/MacroAssemblerX86Common.h	2019-03-05 17:09:33.000000000 +0100
+@@ -4264,11 +4264,41 @@ private:
+     }
+ #endif
+ 
++#if CPU(X86)
++#if OS(MAC_OS_X)
++
++    // All X86 Macs are guaranteed to support at least SSE2,
++    static bool isSSE2Present()
++    {
++        return true;
++    }
++
++#else // OS(MAC_OS_X)
++    static bool isSSE2Present()
++    {
++        if (s_sse2CheckState == CPUIDCheckState::NotChecked)
++            collectCPUFeatures();
++        return s_sse2CheckState == CPUIDCheckState::Set;
++    }
++
++#endif // OS(MAC_OS_X)
++#elif !defined(NDEBUG) // CPU(X86)
++
++    // On x86-64 we should never be checking for SSE2 in a non-debug build,
++    // but non debug add this method to keep the asserts above happy.
++    static bool isSSE2Present()
++    {
++        return true;
++    }
++
++#endif
++
+     using CPUID = std::array<unsigned, 4>;
+     static CPUID getCPUID(unsigned level);
+     static CPUID getCPUIDEx(unsigned level, unsigned count);
+     JS_EXPORT_PRIVATE static void collectCPUFeatures();
+ 
++    JS_EXPORT_PRIVATE static CPUIDCheckState s_sse2CheckState;
+     JS_EXPORT_PRIVATE static CPUIDCheckState s_sse4_1CheckState;
+     JS_EXPORT_PRIVATE static CPUIDCheckState s_sse4_2CheckState;
+     JS_EXPORT_PRIVATE static CPUIDCheckState s_avxCheckState;
