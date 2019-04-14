@@ -1,5 +1,6 @@
 %define debug_package %{nil}
 %define _disable_lto 1
+%define Werror_cflags %nil
 
 %define oname webkitgtk
 
@@ -17,7 +18,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.22.5
+Version:	2.24.1
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -26,6 +27,7 @@ Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 # (cb) force disable lto when building the typelibs
 Patch1:		webkitgtk-2.10.4-nolto.patch
 Patch2:		webkitgtk-2.16.5-clang-5.0-workaround.patch
+Patch3:		webkitgtk-2.24.1-mga-revert-sse2-requirement.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -64,6 +66,7 @@ BuildRequires:	libxml2-utils
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(geoclue-2.0)
 BuildRequires:	pkgconfig(libnotify)
+BuildRequires:  pkgconfig(libopenjp2)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(gpg-error)
 BuildRequires:	pkgconfig(libgcrypt) >= 1.6.0
@@ -137,7 +140,7 @@ GObject Introspection interface description for WebKit.
 
 %prep
 %setup -qn %{oname}-%{version}
-%apply_patches
+%autopatch -p1
 
 %build
 # (tpg) do not build debug code
@@ -145,7 +148,7 @@ GObject Introspection interface description for WebKit.
 # (cb) ensure lto disabled
 %global optflags %(echo %{optflags} -fno-lto | sed -e 's/-g /-g0 /' -e 's/-gdwarf-4//' -e 's/-Oz/-O1/')
 
-%ifarch %{ix86} %{arm}
+%ifarch %{ix86} %{arm} %{armx}
 # clang wont build this on i586:
 # /bits/atomic_base.h:408:16: error: cannot compile this atomic library call yet
 #      { return __atomic_add_fetch(&_M_i, 1, memory_order_seq_cst); }
@@ -170,10 +173,10 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_CXX_FLAGS_DEBUG=""
 
 
-%make
+%make_build
 
 %install
-%makeinstall_std -C build
+%make_install -C build
 
 %find_lang WebKit2GTK-%{api}
 
