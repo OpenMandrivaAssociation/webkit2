@@ -1,7 +1,7 @@
 # Fix build on aarch64
-%ifarch aarch64
-%define _smp_ncpus_max 2
-%endif
+#ifarch aarch64
+#define _smp_ncpus_max 2
+#endif
 
 %define debug_package %{nil}
 %define _disable_lto 1
@@ -153,7 +153,7 @@ GObject Introspection interface description for WebKit.
 # (cb) ensure lto disabled
 %global optflags %(echo %{optflags} -fno-lto | sed -e 's/-g /-g0 /' -e 's/-gdwarf-4//' -e 's/-Oz/-O1/')
 
-%ifarch %{ix86} %{arm}
+%ifarch %{ix86} %{arm} %{armx}
 # clang wont build this on i586:
 # /bits/atomic_base.h:408:16: error: cannot compile this atomic library call yet
 #      { return __atomic_add_fetch(&_M_i, 1, memory_order_seq_cst); }
