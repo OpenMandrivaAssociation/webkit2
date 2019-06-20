@@ -27,7 +27,7 @@ Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 # (cb) force disable lto when building the typelibs
 Patch1:		webkitgtk-2.10.4-nolto.patch
 Patch2:		webkitgtk-2.16.5-clang-5.0-workaround.patch
-Patch3:		webkitgtk-2.24.1-mga-revert-sse2-requirement.patch
+#Patch3:		webkitgtk-2.24.1-mga-revert-sse2-requirement.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
