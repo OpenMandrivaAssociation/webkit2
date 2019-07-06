@@ -18,7 +18,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.24.2
+Version:	2.24.3
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
