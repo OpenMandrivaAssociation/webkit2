@@ -1,3 +1,6 @@
+#FIXME
+# For some unknown (yet) reason webkit on aarch64 can be build only on mcbin. Synquacer causing strange issue.
+
 %define debug_package %{nil}
 %define _disable_lto 1
 %define Werror_cflags %nil
@@ -18,7 +21,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.24.3
+Version:	2.24.4
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
