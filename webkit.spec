@@ -35,6 +35,7 @@ URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
+BuildRequires:	bubblewrap
 BuildRequires:	curl-devel >= 7.11.0
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel
