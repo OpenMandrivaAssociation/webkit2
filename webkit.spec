@@ -21,7 +21,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.24.4
+Version:	2.26.1
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -29,12 +29,13 @@ Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 #Patch0:		webkitgtk-typelib-sharelib-link.patch
 # (cb) force disable lto when building the typelibs
 Patch1:		webkitgtk-2.10.4-nolto.patch
-Patch2:		webkitgtk-2.16.5-clang-5.0-workaround.patch
+#Patch2:		webkitgtk-2.16.5-clang-5.0-workaround.patch
 #Patch3:		webkitgtk-2.24.1-mga-revert-sse2-requirement.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
+BuildRequires:	bubblewrap
 BuildRequires:	curl-devel >= 7.11.0
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel
@@ -70,6 +71,7 @@ BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(geoclue-2.0)
 BuildRequires:	pkgconfig(libnotify)
 BuildRequires:  pkgconfig(libopenjp2)
+BuildRequires:	pkgconfig(libseccomp)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(gpg-error)
 BuildRequires:	pkgconfig(libgcrypt) >= 1.6.0
@@ -77,6 +79,8 @@ BuildRequires:	gail-devel
 BuildRequires:	ruby
 BuildRequires:	cmake >= 2.8.8
 BuildRequires:	perl-JSON-PP
+BuildRequires:	xdg-dbus-proxy
+
 Requires:	%{libwebkit2} = %{version}
 %rename		webkit2
 
@@ -164,6 +168,7 @@ export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
 %cmake	-DPORT=GTK \
 	-DUSE_LD_GOLD=OFF \
+	-DUSE_WPE_RENDERER=OFF \
 	-DUSE_WOFF2:BOOL=OFF \
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
 	-DCMAKE_BUILD_TYPE=Release \
