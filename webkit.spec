@@ -79,6 +79,8 @@ BuildRequires:	gail-devel
 BuildRequires:	ruby
 BuildRequires:	cmake >= 2.8.8
 BuildRequires:	perl-JSON-PP
+BuildRequires:	xdg-dbus-proxy
+
 Requires:	%{libwebkit2} = %{version}
 %rename		webkit2
 
