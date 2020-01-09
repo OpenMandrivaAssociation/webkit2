@@ -21,16 +21,16 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.26.1
+Version:	2.26.2
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
-#Patch0:		webkitgtk-typelib-sharelib-link.patch
+Patch0:		webkit-gtk-2.24.4-icu-65.patch
 # (cb) force disable lto when building the typelibs
 Patch1:		webkitgtk-2.10.4-nolto.patch
-#Patch2:		webkitgtk-2.16.5-clang-5.0-workaround.patch
-#Patch3:		webkitgtk-2.24.1-mga-revert-sse2-requirement.patch
+Patch2:		2.26.2-fix-noGL-build.patch
+Patch3:		webkit-gtk-2.24.4-eglmesaext-include.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -44,6 +44,7 @@ BuildRequires:	hyphen-devel
 BuildRequires:	icu-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	png-devel
+BuildRequires:	egl-devel
 BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libsecret-1)
 BuildRequires:	pkgconfig(geoclue-2.0)
