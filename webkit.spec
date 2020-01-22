@@ -26,7 +26,6 @@ Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
-Patch0:		webkit-gtk-2.24.4-icu-65.patch
 # (cb) force disable lto when building the typelibs
 Patch1:		webkitgtk-2.10.4-nolto.patch
 Patch2:		2.26.2-fix-noGL-build.patch
