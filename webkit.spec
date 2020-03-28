@@ -149,8 +149,6 @@ GObject Introspection interface description for WebKit.
 %autopatch -p1
 
 %build
-#export CC=gcc
-#export CXX=g++
 # (tpg) do not build debug code
 # (cb) clang segfaults at Oz
 # (cb) ensure lto disabled
