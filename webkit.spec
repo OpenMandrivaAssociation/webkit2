@@ -34,51 +34,53 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	bubblewrap
-BuildRequires:	curl-devel >= 7.11.0
 BuildRequires:	flex
-BuildRequires:	fontconfig-devel
 BuildRequires:	gperf
 BuildRequires:	hyphen-devel
-BuildRequires:	icu-devel
-BuildRequires:	jpeg-devel
-BuildRequires:	png-devel
-BuildRequires:	egl-devel
-BuildRequires:	pkgconfig(libwebp)
-BuildRequires:	pkgconfig(libsecret-1)
-BuildRequires:	pkgconfig(geoclue-2.0)
-BuildRequires:	pkgconfig(ruby)
-BuildRequires:	librsvg-devel >= 2.2.0
-BuildRequires:	libstdc++-devel
-BuildRequires:	libsoup-devel >= 2.42.0
-BuildRequires:	libtool
-BuildRequires:	libxslt-devel
-BuildRequires:	libxt-devel
-BuildRequires:	pkgconfig
-BuildRequires:	pkgconfig(gtk+-2.0)
-BuildRequires:	gtk+3-devel
-BuildRequires:	libgail-3.0-devel
-BuildRequires:	pkgconfig(glesv2)
-BuildRequires:	sqlite3-devel
-BuildRequires:	pkgconfig(xft)
-BuildRequires:	pkgconfig(gstreamer-plugins-base-1.0)
-BuildRequires:	pkgconfig(gstreamer-gl-1.0)
-BuildRequires:	libgnome-keyring-devel
-BuildRequires:	gobject-introspection-devel
-BuildRequires:	enchant-devel
-BuildRequires:	libxml2-utils
-BuildRequires:	pkgconfig(gl)
-BuildRequires:	pkgconfig(geoclue-2.0)
-BuildRequires:	pkgconfig(libnotify)
-BuildRequires:  pkgconfig(libopenjp2)
-BuildRequires:	pkgconfig(libseccomp)
-BuildRequires:	pkgconfig(gnutls)
-BuildRequires:	pkgconfig(gpg-error)
-BuildRequires:	pkgconfig(libgcrypt) >= 1.6.0
-BuildRequires:	gail-devel
-BuildRequires:	ruby
-BuildRequires:	cmake >= 2.8.8
 BuildRequires:	perl-JSON-PP
 BuildRequires:	xdg-dbus-proxy
+BuildRequires:  ruby
+BuildRequires:  rubygems
+BuildRequires:  cmake
+
+BuildRequires:  pkgconfig(atspi-2)
+BuildRequires:  pkgconfig(cairo)
+BuildRequires:  pkgconfig(egl)
+BuildRequires:  pkgconfig(enchant-2)
+BuildRequires:  pkgconfig(fontconfig)
+BuildRequires:  pkgconfig(freetype2)
+BuildRequires:  pkgconfig(geoclue-2.0)
+BuildRequires:  pkgconfig(gl)
+BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(glesv2)
+BuildRequires:  pkgconfig(gnutls)
+BuildRequires:  pkgconfig(gobject-introspection-1.0)
+BuildRequires:  pkgconfig(gstreamer-1.0)
+BuildRequires:  pkgconfig(gstreamer-plugins-base-1.0)
+BuildRequires:  pkgconfig(gstreamer-plugins-bad-1.0)
+BuildRequires:  pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(harfbuzz)
+BuildRequires:  pkgconfig(icu-uc)
+BuildRequires:  pkgconfig(libjpeg)
+BuildRequires:  pkgconfig(libnotify)
+BuildRequires:  pkgconfig(libopenjp2)
+BuildRequires:  pkgconfig(libpcre)
+BuildRequires:  pkgconfig(libpng)
+BuildRequires:  pkgconfig(libseccomp)
+BuildRequires:  pkgconfig(libsecret-1)
+BuildRequires:  pkgconfig(libsoup-2.4)
+BuildRequires:  pkgconfig(libwebp)
+BuildRequires:  pkgconfig(libwoff2dec)
+BuildRequires:  pkgconfig(libxslt)
+BuildRequires:  pkgconfig(sqlite3)
+BuildRequires:  pkgconfig(upower-glib)
+BuildRequires:  pkgconfig(wayland-client)
+BuildRequires:  pkgconfig(wayland-egl)
+BuildRequires:  pkgconfig(wayland-server)
+BuildRequires:  pkgconfig(wpe-1.0)
+BuildRequires:  pkgconfig(wpebackend-fdo-1.0)
+BuildRequires:  pkgconfig(xt)
+BuildRequires:	pkgconfig(libgcrypt)
 
 Requires:	%{libwebkit2} = %{version}
 %rename		webkit2
@@ -169,7 +171,6 @@ export CXXFLAGS="%{optflags} -DNDEBUG -DG_DISABLE_CAST_CHECKS"
 export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory-overheads"
 %cmake	-DPORT=GTK \
 	-DUSE_LD_GOLD=OFF \
-	-DUSE_WPE_RENDERER=OFF \
 	-DUSE_WOFF2:BOOL=OFF \
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
 	-DCMAKE_BUILD_TYPE=Release \
