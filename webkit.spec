@@ -175,6 +175,9 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DLIB_INSTALL_DIR:PATH=%{_libdir} \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
+%ifarch %{ix86}
+	-DENABLE_JIT=OFF \
+%endif
 %ifarch aarch64
 	-DWTF_CPU_ARM64_CORTEXA53=OFF \
 %endif
