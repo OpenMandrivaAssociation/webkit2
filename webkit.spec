@@ -156,6 +156,9 @@ GObject Introspection interface description for WebKit.
 # (cb) ensure lto disabled
 %global optflags %(echo %{optflags} -fno-lto | sed -e 's/-g /-g0 /' -e 's/-gdwarf-4//' -e 's/-Oz/-O1/')
 
+# fix weird memory allocation
+export GIGACAGE_ENABLED=0
+
 #ifarch %{ix86} %{arm} %{armx}
 # clang wont build this on i586:
 # /bits/atomic_base.h:408:16: error: cannot compile this atomic library call yet
