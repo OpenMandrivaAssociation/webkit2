@@ -180,7 +180,7 @@ export LDFLAGS="%{ldflags} -fuse-ld=bfd -Wl,--no-keep-memory -Wl,--reduce-memory
 	-DCMAKE_BUILD_TYPE=Release \
 	-DCMAKE_C_FLAGS_RELEASE="" \
 	-DPYTHON_EXECUTABLE=%{_bindir}/python3 \
-%ifarch %{ix86} %{armx}
+%ifarch %{ix86} %{arm}
 	-DENABLE_JIT=OFF \
 %endif
 %ifarch aarch64
