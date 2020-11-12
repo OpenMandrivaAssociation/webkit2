@@ -32,7 +32,7 @@ Patch3:		webkit-gtk-2.24.4-eglmesaext-include.patch
 # https://github.com/WebPlatformForEmbedded/libwpe/issues/59
 Patch4:         wpebackend-fdo-soname.patch
 # Fix bogus volatile use caught by gcc-11
-Patch5:         %{name}-gcc11.patch
+Patch5:         webkit2gtk3-gcc11.patch
 
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
