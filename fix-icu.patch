@@ -33,7 +33,7 @@ index c8f28d6e..3c6fbeab 100644
          }
      }
 diff --git a/Source/WTF/wtf/text/icu/UTextProviderLatin1.cpp b/Source/WTF/wtf/text/icu/UTextProviderLatin1.cpp
-index 0a646b7f..92e28977 100644
+index 0a646b7f..49980f95 100644
 --- a/Source/WTF/wtf/text/icu/UTextProviderLatin1.cpp
 +++ b/Source/WTF/wtf/text/icu/UTextProviderLatin1.cpp
 @@ -100,23 +100,23 @@ static UBool uTextLatin1Access(UText* uText, int64_t index, UBool forward)
@@ -64,6 +64,15 @@ index 0a646b7f..92e28977 100644
          }
      }
      
+@@ -144,7 +144,7 @@ static UBool uTextLatin1Access(UText* uText, int64_t index, UBool forward)
+ 
+     uText->nativeIndexingLimit = uText->chunkLength;
+ 
+-    return TRUE;
++    return true;
+ }
+ 
+ static int32_t uTextLatin1Extract(UText* uText, int64_t start, int64_t limit, UChar* dest, int32_t destCapacity, UErrorCode* status)
 @@ -337,7 +337,7 @@ static int64_t uTextLatin1ContextAwareNativeLength(UText* text)
  static UBool uTextLatin1ContextAwareAccess(UText* text, int64_t nativeIndex, UBool forward)
  {
