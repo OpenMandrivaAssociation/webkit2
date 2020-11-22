@@ -28,6 +28,7 @@ Group:		System/Libraries
 Source0:	http://webkitgtk.org/releases/%{oname}-%{version}.tar.xz
 # (cb) force disable lto when building the typelibs
 Patch1:		webkitgtk-2.10.4-nolto.patch
+Patch2:		fix-icu.patch
 Patch3:		webkit-gtk-2.24.4-eglmesaext-include.patch
 URL:		http://www.webkitgtk.org
 BuildRequires:	autoconf
