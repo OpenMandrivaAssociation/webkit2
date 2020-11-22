@@ -32,3 +32,75 @@ index c8f28d6e..3c6fbeab 100644
              return true;
          }
      }
+diff --git a/Source/WTF/wtf/text/icu/UTextProviderLatin1.cpp b/Source/WTF/wtf/text/icu/UTextProviderLatin1.cpp
+index 0a646b7f..92e28977 100644
+--- a/Source/WTF/wtf/text/icu/UTextProviderLatin1.cpp
++++ b/Source/WTF/wtf/text/icu/UTextProviderLatin1.cpp
+@@ -100,23 +100,23 @@ static UBool uTextLatin1Access(UText* uText, int64_t index, UBool forward)
+         if (index < uText->chunkNativeLimit && index >= uText->chunkNativeStart) {
+             // Already inside the buffer. Set the new offset.
+             uText->chunkOffset = static_cast<int32_t>(index - uText->chunkNativeStart);
+-            return TRUE;
++            return true;
+         }
+         if (index >= length && uText->chunkNativeLimit == length) {
+             // Off the end of the buffer, but we can't get it.
+             uText->chunkOffset = static_cast<int32_t>(index - uText->chunkNativeStart);
+-            return FALSE;
++            return false;
+         }
+     } else {
+         if (index <= uText->chunkNativeLimit && index > uText->chunkNativeStart) {
+             // Already inside the buffer. Set the new offset.
+             uText->chunkOffset = static_cast<int32_t>(index - uText->chunkNativeStart);
+-            return TRUE;
++            return true;
+         }
+         if (!index && !uText->chunkNativeStart) {
+             // Already at the beginning; can't go any farther.
+             uText->chunkOffset = 0;
+-            return FALSE;
++            return false;
+         }
+     }
+     
+@@ -337,7 +337,7 @@ static int64_t uTextLatin1ContextAwareNativeLength(UText* text)
+ static UBool uTextLatin1ContextAwareAccess(UText* text, int64_t nativeIndex, UBool forward)
+ {
+     if (!text->context)
+-        return FALSE;
++        return false;
+     int64_t nativeLength = uTextLatin1ContextAwareNativeLength(text);
+     UBool isAccessible;
+     if (uTextAccessInChunkOrOutOfRange(text, nativeIndex, nativeLength, forward, isAccessible))
+@@ -357,7 +357,7 @@ static UBool uTextLatin1ContextAwareAccess(UText* text, int64_t nativeIndex, UBo
+         ASSERT(newContext == UTextProviderContext::PriorContext);
+         textLatin1ContextAwareSwitchToPriorContext(text, nativeIndex, nativeLength, forward);
+     }
+-    return TRUE;
++    return true;
+ }
+ 
+ static int32_t uTextLatin1ContextAwareExtract(UText*, int64_t, int64_t, UChar*, int32_t, UErrorCode* errorCode)
+diff --git a/Source/WTF/wtf/text/icu/UTextProviderUTF16.cpp b/Source/WTF/wtf/text/icu/UTextProviderUTF16.cpp
+index 69c8d091..9c3fa709 100644
+--- a/Source/WTF/wtf/text/icu/UTextProviderUTF16.cpp
++++ b/Source/WTF/wtf/text/icu/UTextProviderUTF16.cpp
+@@ -126,7 +126,7 @@ static inline int64_t uTextUTF16ContextAwareNativeLength(UText* text)
+ static UBool uTextUTF16ContextAwareAccess(UText* text, int64_t nativeIndex, UBool forward)
+ {
+     if (!text->context)
+-        return FALSE;
++        return false;
+     int64_t nativeLength = uTextUTF16ContextAwareNativeLength(text);
+     UBool isAccessible;
+     if (uTextAccessInChunkOrOutOfRange(text, nativeIndex, nativeLength, forward, isAccessible))
+@@ -146,7 +146,7 @@ static UBool uTextUTF16ContextAwareAccess(UText* text, int64_t nativeIndex, UBoo
+         ASSERT(newContext == UTextProviderContext::PriorContext);
+         textUTF16ContextAwareSwitchToPriorContext(text, nativeIndex, nativeLength, forward);
+     }
+-    return TRUE;
++    return true;
+ }
+ 
+ static int32_t uTextUTF16ContextAwareExtract(UText*, int64_t, int64_t, UChar*, int32_t, UErrorCode* errorCode)
