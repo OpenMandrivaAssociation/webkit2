@@ -21,7 +21,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.30.5
+Version:	2.30.6
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
