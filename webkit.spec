@@ -21,7 +21,7 @@
 
 Summary:	Web browser engine
 Name:		webkit
-Version:	2.30.6
+Version:	2.32.0
 Release:	1
 License:	BSD and LGPLv2+
 Group:		System/Libraries
@@ -73,6 +73,7 @@ BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  pkgconfig(libwebp)
 BuildRequires:  pkgconfig(libwoff2dec)
 BuildRequires:  pkgconfig(libxslt)
+BuildRequires:	pkgconfig(manette-0.2)
 BuildRequires:  pkgconfig(sqlite3)
 BuildRequires:  pkgconfig(upower-glib)
 BuildRequires:  pkgconfig(wayland-client)
